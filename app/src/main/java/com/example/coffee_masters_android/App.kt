@@ -8,10 +8,15 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.coffee_masters_android.pages.InfoPage
+import com.example.coffee_masters_android.pages.MenuPage
+import com.example.coffee_masters_android.pages.OrderPage
 import com.example.coffee_masters_android.ui.theme.Coffee_Masters_AndroidTheme
 
 
@@ -25,16 +30,32 @@ fun App_Preview() {
 
 @Composable
 fun App() {
+    val mySelectedRoute= remember {
+        mutableStateOf(Routes.MenuPage.route)
+    }
     Scaffold(
         topBar = {
                  TopAppBar{
                      Apptitle()
                  }
         },
-        bottomBar ={}
-    ){
-        OffersPage()
-    }
+        content = {
+            when(mySelectedRoute.value) {
+                Routes.MenuPage.route -> MenuPage()
+                Routes.offersPage.route -> OffersPage()
+                Routes.OrderPage.route -> OrderPage()
+                Routes.InfoPage.route -> InfoPage()
+            }
+        },
+        bottomBar ={
+            NavBar(
+                selectedRoute = mySelectedRoute.value,
+                onchange = {
+                    newRoute->
+                mySelectedRoute.value=newRoute
+            })
+        }
+    )
 
 }
 

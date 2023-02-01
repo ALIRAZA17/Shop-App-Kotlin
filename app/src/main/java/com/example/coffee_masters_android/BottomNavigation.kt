@@ -1,10 +1,10 @@
 package com.example.coffee_masters_android
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
@@ -45,12 +45,21 @@ fun NavbarItem_Preview() {
     NavBarItem(page = Routes.offersPage)
 }
 
-@Preview
 @Composable
-fun NavBar() {
-    Row() {
+fun NavBar(selectedRoute: String=Routes.MenuPage.route,onchange:(String)->Unit) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.primary).padding(16.dp)
+    ) {
         for (page in Routes.pages){
-            NavBarItem(page = page)
+            NavBarItem(
+                page = page,
+                selected = selectedRoute==page.route,
+                modifier = Modifier.clickable {
+                    onchange(page.route)
+                }
+
+            )
         }
     }
 }
@@ -63,7 +72,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
             imageVector = page.icon,
             contentDescription = page.name,
             colorFilter = ColorFilter.tint(
-                if (selected) Alternative1 else OnPrimary
+                if (selected) OnPrimary else Alternative1
             ),
             modifier = Modifier
                 .padding(bottom = 8.dp)
@@ -71,7 +80,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
         )
         Text(page.name,
             fontSize = 12.sp,
-            color = if (selected) Alternative1 else OnPrimary
+            color = if (selected) OnPrimary else Alternative1
         )
     }
 }
