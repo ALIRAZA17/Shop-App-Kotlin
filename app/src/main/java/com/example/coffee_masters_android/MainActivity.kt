@@ -30,12 +30,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   FirstComposable()
+                   App()
                 }
             }
         }
     }
 }
+
+// My first Composable to test the Previews
 @Preview(showBackground = true)
 @Composable
 fun FirstComposable(){
