@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,9 +49,14 @@ fun OrderPage(dataManager: DataManager) {
         {
             Text(text = "")
         }
-
             else{
-            Text(text = "$sum")
+                Box(
+                    contentAlignment= Alignment.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    Text(text = "Total: $sum")
+
+                }
 
             }
 
