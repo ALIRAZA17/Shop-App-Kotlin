@@ -1,10 +1,12 @@
 package com.example.coffee_masters_android.pages
 
+import android.view.ViewGroup
+import android.webkit.WebViewClient
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 
-@Preview
 @Composable
 fun InfoPage() {
-    
+    Text(text = "Hello Here is the Complete Info About the App")
 }
+
