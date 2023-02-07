@@ -18,11 +18,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import com.example.coffee_masters_android.ui.theme.Coffee_Masters_AndroidTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var dataManager = ViewModelProvider(this).get(DataManager::class.java)
         setContent {
             Coffee_Masters_AndroidTheme {
                 // A surface container using the 'background' color from the theme
@@ -30,32 +32,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   App()
+                   App(dataManager)
                 }
             }
         }
     }
-}
-
-// My first Composable to test the Previews
-@Preview(showBackground = true)
-@Composable
-fun FirstComposable(){
-
-
-    var name = remember {
-        mutableStateOf("")
-    }
-
-    Column() {
-        Text(text = "Hello ${name.value}", modifier = Modifier
-            .padding(16.dp)
-            .background(androidx.compose.ui.graphics.Color.Yellow)
-        )
-
-        TextField(value = name.value, onValueChange = {
-            name.value=it
-        })
-    }
-
 }

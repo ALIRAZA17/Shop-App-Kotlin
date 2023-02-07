@@ -19,17 +19,8 @@ import com.example.coffee_masters_android.pages.MenuPage
 import com.example.coffee_masters_android.pages.OrderPage
 import com.example.coffee_masters_android.ui.theme.Coffee_Masters_AndroidTheme
 
-
-@Preview
 @Composable
-fun App_Preview() {
-    Coffee_Masters_AndroidTheme {
-        App()
-    }
-}
-
-@Composable
-fun App() {
+fun App(dataManager: DataManager) {
     val mySelectedRoute= remember {
         mutableStateOf(Routes.MenuPage.route)
     }
@@ -41,9 +32,9 @@ fun App() {
         },
         content = {
             when(mySelectedRoute.value) {
-                Routes.MenuPage.route -> MenuPage()
+                Routes.MenuPage.route -> MenuPage(dataManager)
                 Routes.offersPage.route -> OffersPage()
-                Routes.OrderPage.route -> OrderPage()
+                Routes.OrderPage.route -> OrderPage(dataManager)
                 Routes.InfoPage.route -> InfoPage()
             }
         },
